@@ -37,7 +37,7 @@ public class ExceptionMiddleware
         return CreateInternalException(context, exception);
     }
 
-    private Task CreateAuthorizationException(HttpContext context, Exception exception)
+    private static Task CreateAuthorizationException(HttpContext context, Exception exception)
     {
         context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
 
@@ -51,7 +51,7 @@ public class ExceptionMiddleware
         }.ToString());
     }
 
-    private Task CreateBusinessException(HttpContext context, Exception exception)
+    private static Task CreateBusinessException(HttpContext context, Exception exception)
     {
         context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
 
@@ -65,7 +65,7 @@ public class ExceptionMiddleware
         }.ToString());
     }
 
-    private Task CreateValidationException(HttpContext context, Exception exception)
+    private static Task CreateValidationException(HttpContext context, Exception exception)
     {
         context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
         object errors = ((ValidationException)exception).Errors;
@@ -81,7 +81,7 @@ public class ExceptionMiddleware
         }.ToString());
     }
 
-    private Task CreateInternalException(HttpContext context, Exception exception)
+    private static Task CreateInternalException(HttpContext context, Exception exception)
     {
         context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
 

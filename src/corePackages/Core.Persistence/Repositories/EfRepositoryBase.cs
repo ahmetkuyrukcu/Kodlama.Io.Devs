@@ -17,15 +17,15 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         Context = context;
     }
 
-    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        return await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+        return await Context.Set<TEntity>().FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
-    public async Task<IPaginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-                                                       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy =
+    public async Task<IPaginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null,
+                                                       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy =
                                                            null,
-                                                       Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>?
+                                                       Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>
                                                            include = null,
                                                        int index = 0, int size = 10, bool enableTracking = true,
                                                        CancellationToken cancellationToken = default)
@@ -41,7 +41,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
 
     public async Task<IPaginate<TEntity>> GetListByDynamicAsync(Dynamic.Dynamic dynamic,
                                                                 Func<IQueryable<TEntity>,
-                                                                        IIncludableQueryable<TEntity, object>>?
+                                                                        IIncludableQueryable<TEntity, object>>
                                                                     include = null,
                                                                 int index = 0, int size = 10,
                                                                 bool enableTracking = true,
@@ -79,14 +79,14 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
+    public TEntity Get(Expression<Func<TEntity, bool>> predicate)
     {
         return Context.Set<TEntity>().FirstOrDefault(predicate);
     }
 
-    public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null,
-                                      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-                                      Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+    public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null,
+                                      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+                                      Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
                                       int index = 0, int size = 10,
                                       bool enableTracking = true)
     {
@@ -100,7 +100,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     }
 
     public IPaginate<TEntity> GetListByDynamic(Dynamic.Dynamic dynamic,
-                                               Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>?
+                                               Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>
                                                    include = null, int index = 0, int size = 10,
                                                bool enableTracking = true)
     {

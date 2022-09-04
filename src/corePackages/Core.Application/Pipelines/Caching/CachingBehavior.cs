@@ -7,12 +7,10 @@ using System.Text;
 
 namespace Core.Application.Pipelines.Caching;
 
-public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>, ICachableRequest
+public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>, ICachableRequest
 {
     private readonly IDistributedCache _cache;
     private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
-
     private readonly CacheSettings _cacheSettings;
 
     public CachingBehavior(IDistributedCache cache, ILogger<CachingBehavior<TRequest, TResponse>> logger,
@@ -37,10 +35,11 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
             DistributedCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
             byte[] serializeData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
             await _cache.SetAsync(request.CacheKey, serializeData, cacheOptions, cancellationToken);
+
             return response;
         }
 
-        byte[]? cachedResponse = await _cache.GetAsync(request.CacheKey, cancellationToken);
+        byte[] cachedResponse = await _cache.GetAsync(request.CacheKey, cancellationToken);
         if (cachedResponse != null)
         {
             response = JsonConvert.DeserializeObject<TResponse>(Encoding.Default.GetString(cachedResponse));

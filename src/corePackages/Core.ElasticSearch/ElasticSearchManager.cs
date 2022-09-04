@@ -13,7 +13,7 @@ public class ElasticSearchManager : IElasticSearch
 
     public ElasticSearchManager(IConfiguration configuration)
     {
-        ElasticSearchConfig? settings = configuration.GetSection("ElasticSearchConfig").Get<ElasticSearchConfig>();
+        ElasticSearchConfig settings = configuration.GetSection("ElasticSearchConfig").Get<ElasticSearchConfig>();
         SingleNodeConnectionPool pool = new(new Uri(settings.ConnectionString));
         _connectionSettings = new ConnectionSettings(pool, (builtInSerializer, connectionSettings) =>
                                                          new JsonNetSerializer(
@@ -29,6 +29,7 @@ public class ElasticSearchManager : IElasticSearch
     public IReadOnlyDictionary<IndexName, IndexState> GetIndexList()
     {
         ElasticClient elasticClient = new(_connectionSettings);
+
         return elasticClient.Indices.Get(new GetIndexRequest(Indices.All)).Indices;
     }
 
@@ -36,7 +37,7 @@ public class ElasticSearchManager : IElasticSearch
     public async Task<IElasticSearchResult> InsertManyAsync(string indexName, object[] items)
     {
         ElasticClient elasticClient = GetElasticClient(indexName);
-        BulkResponse? response = await elasticClient.BulkAsync(a =>
+        BulkResponse response = await elasticClient.BulkAsync(a =>
                                                                    a.Index(indexName)
                                                                     .IndexMany(items));
 
@@ -51,7 +52,7 @@ public class ElasticSearchManager : IElasticSearch
         if (elasticClient.Indices.Exists(indexModel.IndexName).Exists)
             return new ElasticSearchResult(false, "Index already exists");
 
-        CreateIndexResponse? response = await elasticClient.Indices.CreateAsync(indexModel.IndexName, se =>
+        CreateIndexResponse response = await elasticClient.Indices.CreateAsync(indexModel.IndexName, se =>
                                             se.Settings(a => a.NumberOfReplicas(
                                                                   indexModel.NumberOfReplicas)
                                                               .NumberOfShards(
@@ -67,21 +68,21 @@ public class ElasticSearchManager : IElasticSearch
     public async Task<IElasticSearchResult> DeleteByElasticIdAsync(ElasticSearchModel model)
     {
         ElasticClient elasticClient = GetElasticClient(model.IndexName);
-        DeleteResponse? response =
+        DeleteResponse response =
             await elasticClient.DeleteAsync<object>(model.ElasticId, x => x.Index(model.IndexName));
+        
         return new ElasticSearchResult(
             response.IsValid,
             response.IsValid ? "Success" : response.ServerError.Error.Reason);
     }
 
 
-    public async Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters)
-        where T : class
+    public async Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters) where T : class
     {
         Type type = typeof(T);
 
         ElasticClient elasticClient = GetElasticClient(parameters.IndexName);
-        ISearchResponse<T>? searchResponse = await elasticClient.SearchAsync<T>(s => s
+        ISearchResponse<T> searchResponse = await elasticClient.SearchAsync<T>(s => s
                                                  .Index(Indices.Index(parameters.IndexName))
                                                  .From(parameters.From)
                                                  .Size(parameters.Size));
@@ -96,11 +97,10 @@ public class ElasticSearchManager : IElasticSearch
         return list;
     }
 
-    public async Task<List<ElasticSearchGetModel<T>>> GetSearchByField<T>(SearchByFieldParameters fieldParameters)
-        where T : class
+    public async Task<List<ElasticSearchGetModel<T>>> GetSearchByField<T>(SearchByFieldParameters fieldParameters) where T : class
     {
         ElasticClient elasticClient = GetElasticClient(fieldParameters.IndexName);
-        ISearchResponse<T>? searchResponse = await elasticClient.SearchAsync<T>(s => s
+        ISearchResponse<T> searchResponse = await elasticClient.SearchAsync<T>(s => s
                                                  .Index(fieldParameters.IndexName)
                                                  .From(fieldParameters.From)
                                                  .Size(fieldParameters.Size));
@@ -115,12 +115,10 @@ public class ElasticSearchManager : IElasticSearch
     }
 
 
-    public async Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(
-        SearchByQueryParameters queryParameters)
-        where T : class
+    public async Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(SearchByQueryParameters queryParameters) where T : class
     {
         ElasticClient elasticClient = GetElasticClient(queryParameters.IndexName);
-        ISearchResponse<T>? searchResponse = await elasticClient.SearchAsync<T>(s => s
+        ISearchResponse<T> searchResponse = await elasticClient.SearchAsync<T>(s => s
                                                  .Index(queryParameters.IndexName)
                                                  .From(queryParameters.From)
                                                  .Size(queryParameters.Size)
@@ -157,7 +155,7 @@ public class ElasticSearchManager : IElasticSearch
     {
         ElasticClient elasticClient = GetElasticClient(model.IndexName);
 
-        IndexResponse? response = await elasticClient.IndexAsync(model.Item, i => i.Index(model.IndexName)
+        IndexResponse response = await elasticClient.IndexAsync(model.Item, i => i.Index(model.IndexName)
                                                                      .Id(model.ElasticId)
                                                                      .Refresh(Refresh.True));
 
@@ -169,8 +167,9 @@ public class ElasticSearchManager : IElasticSearch
     public async Task<IElasticSearchResult> UpdateByElasticIdAsync(ElasticSearchInsertUpdateModel model)
     {
         ElasticClient elasticClient = GetElasticClient(model.IndexName);
-        UpdateResponse<object>? response =
+        UpdateResponse<object> response =
             await elasticClient.UpdateAsync<object>(model.ElasticId, u => u.Index(model.IndexName).Doc(model.Item));
+
         return new ElasticSearchResult(
             response.IsValid,
             response.IsValid ? "Success" : response.ServerError.Error.Reason);

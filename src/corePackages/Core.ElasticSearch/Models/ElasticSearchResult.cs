@@ -1,6 +1,6 @@
 ﻿namespace Core.ElasticSearch.Models;
 
-public class ElasticSearchResult : IElasticSearchResult //todo: refactor
+public class ElasticSearchResult : IElasticSearchResult
 {
     public ElasticSearchResult(bool success, string message) : this(success)
     {
@@ -13,5 +13,6 @@ public class ElasticSearchResult : IElasticSearchResult //todo: refactor
     }
 
     public bool Success { get; set; }
+
     public string Message { get; set; }
 }

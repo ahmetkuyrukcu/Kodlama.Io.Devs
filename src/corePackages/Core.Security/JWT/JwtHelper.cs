@@ -11,8 +11,8 @@ namespace Core.Security.JWT;
 
 public class JwtHelper : ITokenHelper
 {
-    public IConfiguration Configuration { get; }
     private readonly TokenOptions _tokenOptions;
+    private IConfiguration Configuration { get; }
     private DateTime _accessTokenExpiration;
 
     public JwtHelper(IConfiguration configuration)
@@ -28,7 +28,7 @@ public class JwtHelper : ITokenHelper
         SigningCredentials signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
         JwtSecurityToken jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
         JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
-        string? token = jwtSecurityTokenHandler.WriteToken(jwt);
+        string token = jwtSecurityTokenHandler.WriteToken(jwt);
 
         return new AccessToken
         {
@@ -63,6 +63,7 @@ public class JwtHelper : ITokenHelper
             claims: SetClaims(user, operationClaims),
             signingCredentials: signingCredentials
         );
+
         return jwt;
     }
 
@@ -73,6 +74,7 @@ public class JwtHelper : ITokenHelper
         claims.AddEmail(user.Email);
         claims.AddName($"{user.FirstName} {user.LastName}");
         claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
+
         return claims;
     }
 }
