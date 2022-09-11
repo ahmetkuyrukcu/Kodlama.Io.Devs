@@ -7,20 +7,20 @@ using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 
-public class ProgrammingLanguageCommandHandler : IRequestHandler<ProgrammingLanguageCommand, ProgrammingLanguageDto>
+public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, ProgrammingLanguageDto>
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
     private readonly IMapper _mapper;
     private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
-    public ProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
+    public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
     {
         _programmingLanguageRepository = programmingLanguageRepository;
         _mapper = mapper;
         _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
     }
 
-    public async Task<ProgrammingLanguageDto> Handle(ProgrammingLanguageCommand request, CancellationToken cancellationToken)
+    public async Task<ProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
     {
         await _programmingLanguageBusinessRules.BrandNameCanNotBeDuplicatedWhenInserted(request.Name);
 
