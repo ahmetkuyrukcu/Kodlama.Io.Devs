@@ -26,12 +26,16 @@ public class MailKitMailService : IMailService
         BodyBuilder bodyBuilder = new()
         {
             TextBody = mail.TextBody,
-            HtmlBody = mail.HtmlBody
+            HtmlBody = mail.HtmlBody,
         };
 
         if (mail.Attachments != null)
-            foreach (MimeEntity attachment in mail.Attachments)
+        {
+            foreach (var attachment in mail.Attachments)
+            {
                 bodyBuilder.Attachments.Add(attachment);
+            }
+        }
 
         email.Body = bodyBuilder.ToMessageBody();
 

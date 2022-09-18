@@ -17,7 +17,10 @@ public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeletePro
     {
         var programmingLanguage = await _programmingLanguageRepository.GetAsync(x => x.Id == request.Id, cancellationToken);
 
-        if (programmingLanguage is null) throw new BusinessException("Programming Language not found!");
+        if (programmingLanguage == null)
+        {
+            throw new BusinessException("Programming Language not found!");
+        }
 
         await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 

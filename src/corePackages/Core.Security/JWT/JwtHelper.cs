@@ -12,7 +12,9 @@ namespace Core.Security.JWT;
 public class JwtHelper : ITokenHelper
 {
     private readonly TokenOptions _tokenOptions;
+
     private IConfiguration Configuration { get; }
+
     private DateTime _accessTokenExpiration;
 
     public JwtHelper(IConfiguration configuration)
@@ -33,7 +35,7 @@ public class JwtHelper : ITokenHelper
         return new AccessToken
         {
             Token = token,
-            Expiration = _accessTokenExpiration
+            Expiration = _accessTokenExpiration,
         };
     }
 
@@ -45,15 +47,13 @@ public class JwtHelper : ITokenHelper
             Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
             Expires = DateTime.UtcNow.AddDays(7),
             Created = DateTime.UtcNow,
-            CreatedByIp = ipAddress
+            CreatedByIp = ipAddress,
         };
 
         return refreshToken;
     }
 
-    public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
-                                                   SigningCredentials signingCredentials,
-                                                   IList<OperationClaim> operationClaims)
+    public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredentials, IList<OperationClaim> operationClaims)
     {
         JwtSecurityToken jwt = new(
             tokenOptions.Issuer,
@@ -61,13 +61,12 @@ public class JwtHelper : ITokenHelper
             expires: _accessTokenExpiration,
             notBefore: DateTime.Now,
             claims: SetClaims(user, operationClaims),
-            signingCredentials: signingCredentials
-        );
+            signingCredentials: signingCredentials);
 
         return jwt;
     }
 
-    private IEnumerable<Claim> SetClaims(User user, IList<OperationClaim> operationClaims)
+    private static IEnumerable<Claim> SetClaims(User user, IEnumerable<OperationClaim> operationClaims)
     {
         List<Claim> claims = new();
         claims.AddNameIdentifier(user.Id.ToString());

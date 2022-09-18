@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Kodlama.Io.Devs.Domain\Kodlama.Io.Devs.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Update="C:\Users\ahmet\source\repos\Kodlama.Io.Devs\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
 </Project>

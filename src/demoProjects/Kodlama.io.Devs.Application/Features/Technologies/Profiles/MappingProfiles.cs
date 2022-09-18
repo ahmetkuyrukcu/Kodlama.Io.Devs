@@ -11,8 +11,9 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Technology, TechnologyDto>().ReverseMap();
-        //CreateMap<Technology, CreateTechnologyCommand>().ReverseMap();
-        //CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
+
+        // CreateMap<Technology, CreateTechnologyCommand>().ReverseMap();
+        // CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
         CreateMap<IPaginate<Technology>, TechnologyListModel>().ReverseMap();
     }
 }

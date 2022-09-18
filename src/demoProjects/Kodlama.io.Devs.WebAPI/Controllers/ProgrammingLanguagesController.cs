@@ -27,7 +27,7 @@ public class ProgrammingLanguagesController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand programmingLanguageCommand)
     {
-        return Created("", await Mediator.Send(programmingLanguageCommand));
+        return Created(string.Empty, await Mediator.Send(programmingLanguageCommand));
     }
 
     [HttpPut]

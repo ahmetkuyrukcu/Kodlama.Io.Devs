@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+﻿using System.Net;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace Core.CrossCuttingConcerns.Exceptions;
 
@@ -26,14 +26,25 @@ public class ExceptionMiddleware
         }
     }
 
-    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
 
-        if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
-        if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
+        if (exception.GetType() == typeof(ValidationException))
+        {
+            return CreateValidationException(context, exception);
+        }
+
+        if (exception.GetType() == typeof(BusinessException))
+        {
+            return CreateBusinessException(context, exception);
+        }
+
         if (exception.GetType() == typeof(AuthorizationException))
+        {
             return CreateAuthorizationException(context, exception);
+        }
+
         return CreateInternalException(context, exception);
     }
 
@@ -47,7 +58,7 @@ public class ExceptionMiddleware
             Type = "https://example.com/probs/authorization",
             Title = "Authorization exception",
             Detail = exception.Message,
-            Instance = ""
+            Instance = string.Empty,
         }.ToString());
     }
 
@@ -61,7 +72,7 @@ public class ExceptionMiddleware
             Type = "https://example.com/probs/business",
             Title = "Business exception",
             Detail = exception.Message,
-            Instance = ""
+            Instance = string.Empty,
         }.ToString());
     }
 
@@ -75,9 +86,9 @@ public class ExceptionMiddleware
             Status = StatusCodes.Status400BadRequest,
             Type = "https://example.com/probs/validation",
             Title = "Validation error(s)",
-            Detail = "",
-            Instance = "",
-            Errors = errors
+            Detail = string.Empty,
+            Instance = string.Empty,
+            Errors = errors,
         }.ToString());
     }
 
@@ -91,7 +102,7 @@ public class ExceptionMiddleware
             Type = "https://example.com/probs/internal",
             Title = "Internal exception",
             Detail = exception.Message,
-            Instance = ""
+            Instance = string.Empty,
         }.ToString());
     }
 }

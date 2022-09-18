@@ -13,11 +13,14 @@ public interface IElasticSearch
 
     IReadOnlyDictionary<IndexName, IndexState> GetIndexList();
 
-    Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters) where T : class;
+    Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters)
+        where T : class;
 
-    Task<List<ElasticSearchGetModel<T>>> GetSearchByField<T>(SearchByFieldParameters fieldParameters) where T : class;
+    Task<List<ElasticSearchGetModel<T>>> GetSearchByField<T>(SearchByFieldParameters fieldParameters)
+        where T : class;
 
-    Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(SearchByQueryParameters queryParameters) where T : class;
+    Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(SearchByQueryParameters queryParameters)
+        where T : class;
 
     Task<IElasticSearchResult> UpdateByElasticIdAsync(ElasticSearchInsertUpdateModel model);
 

@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.Persistence.Repositories;
 
-public interface IAsyncRepository<T> : IQuery<T> where T : Entity
+public interface IAsyncRepository<T> : IQuery<T>
+    where T : Entity
 {
     Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
 

@@ -1,5 +1,19 @@
 ﻿namespace Core.Persistence.Paging;
 
+public static class Paginate
+{
+    public static IPaginate<T> Empty<T>()
+    {
+        return new Paginate<T>();
+    }
+
+    public static IPaginate<TResult> From<TResult, TSource>(IPaginate<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter)
+    {
+        return new Paginate<TSource, TResult>(source, converter);
+    }
+}
+
+[System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Reviewed.")]
 public class Paginate<T> : IPaginate<T>
 {
     public int From { get; set; }
@@ -27,7 +41,10 @@ public class Paginate<T> : IPaginate<T>
     {
         var enumerable = source as T[] ?? source.ToArray();
 
-        if (from > index) throw new ArgumentException($"indexFrom: {from} > pageIndex: {index}, must indexFrom <= pageIndex");
+        if (from > index)
+        {
+            throw new ArgumentException($"indexFrom: {from} > pageIndex: {index}, must indexFrom <= pageIndex");
+        }
 
         if (source is IQueryable<T> queryable)
         {
@@ -50,6 +67,7 @@ public class Paginate<T> : IPaginate<T>
     }
 }
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Reviewed.")]
 public class Paginate<TSource, TResult> : IPaginate<TResult>
 {
     public int Index { get; }
@@ -83,7 +101,10 @@ public class Paginate<TSource, TResult> : IPaginate<TResult>
     {
         var enumerable = source as TSource[] ?? source.ToArray();
 
-        if (from > index) throw new ArgumentException($"From: {from} > Index: {index}, must From <= Index");
+        if (from > index)
+        {
+            throw new ArgumentException($"From: {from} > Index: {index}, must From <= Index");
+        }
 
         if (source is IQueryable<TSource> queryable)
         {
@@ -103,18 +124,5 @@ public class Paginate<TSource, TResult> : IPaginate<TResult>
             Pages = (int)Math.Ceiling(Count / (double)Size);
             Items = new List<TResult>(converter(enumerable.Skip((Index - From) * Size).Take(Size).ToArray()));
         }
-    }
-}
-
-public static class Paginate
-{
-    public static IPaginate<T> Empty<T>()
-    {
-        return new Paginate<T>();
-    }
-
-    public static IPaginate<TResult> From<TResult, TSource>(IPaginate<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter)
-    {
-        return new Paginate<TSource, TResult>(source, converter);
     }
 }

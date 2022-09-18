@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 
-public class UpdateProgrammingLanguageCommandHandler: IRequestHandler<UpdateProgrammingLanguageCommand, ProgrammingLanguageDto>
+public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, ProgrammingLanguageDto>
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
     private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ public class UpdateProgrammingLanguageCommandHandler: IRequestHandler<UpdateProg
     {
         var programmingLanguage = await _programmingLanguageRepository.GetAsync(x => x.Id == request.Id, cancellationToken);
 
-        if (programmingLanguage is null)
+        if (programmingLanguage == null)
         {
             throw new BusinessException("Programming Language not found!");
         }

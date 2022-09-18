@@ -10,4 +10,8 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Update="C:\Users\ahmet\source\repos\Kodlama.Io.Devs\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
 </Project>

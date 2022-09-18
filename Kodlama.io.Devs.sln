@@ -31,6 +31,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kodlama.Io.Devs.Persistence
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kodlama.Io.Devs.WebAPI", "src\demoProjects\Kodlama.Io.Devs.WebAPI\Kodlama.Io.Devs.WebAPI.csproj", "{BFB9B030-054B-496C-8C41-410B1B8CC206}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code-analyzer", "code-analyzer", "{3A814374-EFEE-47EB-963C-6B392A57C0C7}"
+	ProjectSection(SolutionItems) = preProject
+		stylecop.json = stylecop.json
+		StyleCop.ruleset = StyleCop.ruleset
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

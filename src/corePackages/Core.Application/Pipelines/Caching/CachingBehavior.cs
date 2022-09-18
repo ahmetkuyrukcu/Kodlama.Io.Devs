@@ -1,13 +1,14 @@
-﻿using MediatR;
+﻿using System.Text;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace Core.Application.Pipelines.Caching;
 
-public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>, ICachableRequest
+public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>, ICachableRequest
 {
     private readonly IDistributedCache _cache;
     private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
@@ -21,17 +22,19 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         _cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>();
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-                                        RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
         TResponse response;
-        if (request.BypassCache) return await next();
+
+        if (request.BypassCache)
+        {
+            return await next();
+        }
 
         async Task<TResponse> GetResponseAndAddToCache()
         {
             response = await next();
-            TimeSpan? slidingExpiration =
-                request.SlidingExpiration ?? TimeSpan.FromDays(_cacheSettings.SlidingExpiration);
+            TimeSpan? slidingExpiration = request.SlidingExpiration ?? TimeSpan.FromDays(_cacheSettings.SlidingExpiration);
             DistributedCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
             byte[] serializeData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
             await _cache.SetAsync(request.CacheKey, serializeData, cacheOptions, cancellationToken);
@@ -40,6 +43,7 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         }
 
         byte[] cachedResponse = await _cache.GetAsync(request.CacheKey, cancellationToken);
+
         if (cachedResponse != null)
         {
             response = JsonConvert.DeserializeObject<TResponse>(Encoding.Default.GetString(cachedResponse));

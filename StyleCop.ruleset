@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Code Analyzers Custom Ruleset" Description="Custom ruleset for Kodlama.Io.Devs projects." ToolsVersion="14.0">
+	<Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+		<Rule Id="SA0001" Action="None" />
+		<Rule Id="SA1101" Action="None" />
+		<Rule Id="SA1103" Action="None" />
+		<Rule Id="SA1116" Action="None" />
+		<Rule Id="SA1117" Action="None" />
+		<Rule Id="SA1124" Action="None" />
+		<Rule Id="SA1128" Action="None" />
+		<Rule Id="SA1200" Action="None" />
+		<Rule Id="SA1201" Action="None" />
+		<Rule Id="SA1308" Action="None" />
+		<Rule Id="SA1309" Action="None" />
+		<Rule Id="SA1407" Action="None" />
+		<Rule Id="SA1408" Action="None" />
+		<Rule Id="SA1512" Action="None" />
+		<Rule Id="SA1600" Action="None" />
+		<Rule Id="SA1601" Action="None" />
+		<Rule Id="SA1602" Action="None" />
+		<Rule Id="SA1609" Action="None" />
+		<Rule Id="SA1611" Action="None" />
+		<Rule Id="SA1623" Action="None" />
+		<Rule Id="SA1633" Action="None" />
+		<Rule Id="SA1634" Action="None" />
+		<Rule Id="SA1635" Action="None" />
+		<Rule Id="SA1636" Action="None" />
+		<Rule Id="SA1637" Action="None" />
+		<Rule Id="SA1638" Action="None" />
+		<Rule Id="SA1639" Action="None" />
+		<Rule Id="SA1640" Action="None" />
+		<Rule Id="SA1641" Action="None" />
+		<Rule Id="SA1642" Action="None" />
+		<Rule Id="SA1643" Action="None" />
+		<Rule Id="SX1101" Action="Warning" />
+		<Rule Id="SX1309" Action="Warning" />
+		<Rule Id="SX1309S" Action="Warning" />
+	</Rules>
+	<Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+		<Rule Id="CA1031" Action="None" />
+		<Rule Id="CA1032" Action="None" />
+		<Rule Id="CA1040" Action="None" />
+		<Rule Id="CA1062" Action="None" />
+		<Rule Id="CA1303" Action="None" />
+		<Rule Id="CA1707" Action="None" />
+		<Rule Id="CA1716" Action="None" />
+		<Rule Id="CA1717" Action="None" />
+		<Rule Id="CA1801" Action="None" />
+		<Rule Id="CA1822" Action="None" />
+		<Rule Id="CA2007" Action="None" />
+		<Rule Id="CA2227" Action="None" />
+	</Rules>
+</RuleSet>

@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using System.Reflection;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Kodlama.Io.Devs.Application
 {
@@ -17,6 +17,7 @@ namespace Kodlama.Io.Devs.Application
             services.AddScoped<ProgrammingLanguageBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));

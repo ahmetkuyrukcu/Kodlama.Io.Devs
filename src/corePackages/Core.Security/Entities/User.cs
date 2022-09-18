@@ -27,8 +27,7 @@ public class User : Entity
     {
     }
 
-    public User(Guid id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash,
-                bool status, AuthenticatorType authenticatorType) : this()
+    public User(Guid id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType) : this()
     {
         Id = id;
         FirstName = firstName;

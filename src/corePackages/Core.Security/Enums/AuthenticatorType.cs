@@ -4,5 +4,5 @@ public enum AuthenticatorType
 {
     None,
     Email,
-    Otp
+    Otp,
 }
