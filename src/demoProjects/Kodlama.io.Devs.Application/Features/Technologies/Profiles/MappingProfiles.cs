@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
-using Kodlama.io.Devs.Application.Features.Technologies.Dtos;
-using Kodlama.io.Devs.Application.Features.Technologies.Models;
-using Kodlama.io.Devs.Domain.Entities;
+using Kodlama.Io.Devs.Application.Features.Technologies.Dtos;
+using Kodlama.Io.Devs.Application.Features.Technologies.Models;
+using Kodlama.Io.Devs.Domain.Entities;
 
-namespace Kodlama.io.Devs.Application.Features.Technologies.Profiles;
+namespace Kodlama.Io.Devs.Application.Features.Technologies.Profiles;
 
 public class MappingProfiles : Profile
 {

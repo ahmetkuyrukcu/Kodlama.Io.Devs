@@ -1,11 +1,11 @@
-﻿using Kodlama.io.Devs.Application.Services.Repositories;
-using Kodlama.io.Devs.Persistence.Contexts;
-using Kodlama.io.Devs.Persistence.Repositories;
+﻿using Kodlama.Io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Persistence.Contexts;
+using Kodlama.Io.Devs.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Kodlama.io.Devs.Persistence;
+namespace Kodlama.Io.Devs.Persistence;
 
 public static class PersistenceServiceRegistration
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 
 public class DeleteProgrammingLanguageCommand : IRequest
 {

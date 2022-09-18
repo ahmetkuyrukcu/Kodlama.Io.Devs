@@ -1,8 +1,8 @@
-﻿using Kodlama.io.Devs.Domain.Entities;
+﻿using Kodlama.Io.Devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Kodlama.io.Devs.Persistence.Contexts;
+namespace Kodlama.Io.Devs.Persistence.Contexts;
 
 public class BaseDbContext : DbContext
 {

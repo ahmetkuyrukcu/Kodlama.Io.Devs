@@ -2,10 +2,10 @@
 using System.Reflection;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application
+namespace Kodlama.Io.Devs.Application
 {
     public static class ApplicationServiceRegistration
     {

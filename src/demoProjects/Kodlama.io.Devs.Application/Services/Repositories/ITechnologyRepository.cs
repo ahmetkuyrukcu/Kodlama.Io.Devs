@@ -1,7 +1,7 @@
 ﻿using Core.Persistence.Repositories;
-using Kodlama.io.Devs.Domain.Entities;
+using Kodlama.Io.Devs.Domain.Entities;
 
-namespace Kodlama.io.Devs.Application.Services.Repositories;
+namespace Kodlama.Io.Devs.Application.Services.Repositories;
 
 public interface ITechnologyRepository : IAsyncRepository<Technology>, IRepository<Technology>
 {

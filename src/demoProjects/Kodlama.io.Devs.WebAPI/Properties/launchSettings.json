@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Kodlama.io.Devs.WebAPI": {
+    "Kodlama.Io.Devs.WebAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

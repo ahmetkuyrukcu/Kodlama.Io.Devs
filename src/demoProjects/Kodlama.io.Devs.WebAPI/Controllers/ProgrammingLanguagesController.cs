@@ -1,12 +1,12 @@
 ﻿using Core.Application.Requests;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kodlama.io.Devs.WebAPI.Controllers;
+namespace Kodlama.Io.Devs.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

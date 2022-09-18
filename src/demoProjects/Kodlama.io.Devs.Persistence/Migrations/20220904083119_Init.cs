@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Kodlama.io.Devs.Persistence.Migrations
+namespace Kodlama.Io.Devs.Persistence.Migrations
 {
     public partial class Init : Migration
     {

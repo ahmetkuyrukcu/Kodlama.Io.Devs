@@ -1,7 +1,7 @@
 ﻿using Core.Persistence.Paging;
-using Kodlama.io.Devs.Application.Features.Technologies.Dtos;
+using Kodlama.Io.Devs.Application.Features.Technologies.Dtos;
 
-namespace Kodlama.io.Devs.Application.Features.Technologies.Models;
+namespace Kodlama.Io.Devs.Application.Features.Technologies.Models;
 
 public class TechnologyListModel : BasePageableModel
 {

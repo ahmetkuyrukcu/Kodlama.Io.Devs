@@ -1,6 +1,6 @@
 ﻿using Core.Persistence.Repositories;
 
-namespace Kodlama.io.Devs.Domain.Entities;
+namespace Kodlama.Io.Devs.Domain.Entities;
 
 public class Technology : Entity
 {

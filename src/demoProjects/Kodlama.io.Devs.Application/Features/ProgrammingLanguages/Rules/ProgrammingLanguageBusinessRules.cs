@@ -1,7 +1,7 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
-using Kodlama.io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Application.Services.Repositories;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 
 public class ProgrammingLanguageBusinessRules
 {

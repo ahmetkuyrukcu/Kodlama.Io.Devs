@@ -1,8 +1,8 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
-using Kodlama.io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Application.Services.Repositories;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 
 public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand>
 {

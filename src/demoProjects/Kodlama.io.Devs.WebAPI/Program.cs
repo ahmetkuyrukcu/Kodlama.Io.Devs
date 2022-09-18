@@ -1,5 +1,5 @@
-using Kodlama.io.Devs.Application;
-using Kodlama.io.Devs.Persistence;
+using Kodlama.Io.Devs.Application;
+using Kodlama.Io.Devs.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

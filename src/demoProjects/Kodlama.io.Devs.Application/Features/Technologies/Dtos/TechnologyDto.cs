@@ -1,4 +1,4 @@
-﻿namespace Kodlama.io.Devs.Application.Features.Technologies.Dtos;
+﻿namespace Kodlama.Io.Devs.Application.Features.Technologies.Dtos;
 
 public class TechnologyDto
 {

@@ -1,7 +1,7 @@
 ﻿using Core.Persistence.Paging;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Models;
 
 public class ProgrammingLanguageListModel : BasePageableModel
 {

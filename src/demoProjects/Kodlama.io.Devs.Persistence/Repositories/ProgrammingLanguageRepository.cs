@@ -1,9 +1,9 @@
 ﻿using Core.Persistence.Repositories;
-using Kodlama.io.Devs.Application.Services.Repositories;
-using Kodlama.io.Devs.Domain.Entities;
-using Kodlama.io.Devs.Persistence.Contexts;
+using Kodlama.Io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Domain.Entities;
+using Kodlama.Io.Devs.Persistence.Contexts;
 
-namespace Kodlama.io.Devs.Persistence.Repositories;
+namespace Kodlama.Io.Devs.Persistence.Repositories;
 
 public class ProgrammingLanguageRepository : EfRepositoryBase<ProgrammingLanguage, BaseDbContext>, IProgrammingLanguageRepository
 {

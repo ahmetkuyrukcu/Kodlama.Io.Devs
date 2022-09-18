@@ -1,7 +1,7 @@
-﻿using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+﻿using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 
 public class CreateProgrammingLanguageCommand : IRequest<ProgrammingLanguageDto>
 {

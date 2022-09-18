@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
-using Kodlama.io.Devs.Application.Services.Repositories;
-using Kodlama.io.Devs.Domain.Entities;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using Kodlama.Io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Domain.Entities;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 
 public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, ProgrammingLanguageDto>
 {

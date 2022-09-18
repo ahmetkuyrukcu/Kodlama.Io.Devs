@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kodlama.io.Devs.WebAPI.Controllers;
+namespace Kodlama.Io.Devs.WebAPI.Controllers;
 
 public class BaseController : ControllerBase
 {

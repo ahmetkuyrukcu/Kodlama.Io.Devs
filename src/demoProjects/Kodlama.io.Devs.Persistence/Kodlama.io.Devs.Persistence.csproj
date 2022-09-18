@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kodlama.io.Devs.Application\Kodlama.io.Devs.Application.csproj" />
-    <ProjectReference Include="..\Kodlama.io.Devs.Domain\Kodlama.io.Devs.Domain.csproj" />
+    <ProjectReference Include="..\Kodlama.Io.Devs.Application\Kodlama.Io.Devs.Application.csproj" />
+    <ProjectReference Include="..\Kodlama.Io.Devs.Domain\Kodlama.Io.Devs.Domain.csproj" />
   </ItemGroup>
 
 </Project>

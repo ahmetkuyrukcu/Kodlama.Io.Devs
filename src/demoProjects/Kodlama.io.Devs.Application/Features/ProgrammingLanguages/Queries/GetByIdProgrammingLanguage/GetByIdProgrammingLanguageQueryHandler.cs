@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
-using Kodlama.io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.Io.Devs.Application.Services.Repositories;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
+namespace Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 
 public class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, ProgrammingLanguageDto>
 {
