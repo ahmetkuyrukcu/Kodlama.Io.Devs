@@ -10,6 +10,8 @@ public class BaseDbContext : DbContext
 
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
 
+    public DbSet<Technology> Technologies { get; set; }
+
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
@@ -25,14 +27,30 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ProgrammingLanguage>(a =>
+        modelBuilder.Entity<ProgrammingLanguage>(x =>
         {
-            a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
-            a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Name).HasColumnName("Name");
+            x.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
+            x.Property(p => p.Id).HasColumnName("Id");
+            x.Property(p => p.Name).HasColumnName("Name");
         });
 
-        ProgrammingLanguage[] brandEntitySeeds = { new(Guid.NewGuid(), "C#"), new(Guid.NewGuid(), "Java") };
-        modelBuilder.Entity<ProgrammingLanguage>().HasData(brandEntitySeeds);
+        modelBuilder.Entity<Technology>(x =>
+        {
+            x.ToTable("Technologies").HasKey(k => k.Id);
+            x.Property(p => p.Id).HasColumnName("Id");
+            x.Property(p => p.Name).HasColumnName("Name");
+            x.HasOne(p => p.ProgrammingLanguage).WithMany(p => p.Technologies).HasForeignKey(p => p.ProgrammingLanguageId);
+
+        });
+
+        var cSharpId = Guid.NewGuid();
+        var javaId = Guid.NewGuid();
+
+        ProgrammingLanguage[] programmingLanguageEntitySeeds = { new(cSharpId, "C#"), new(javaId, "Java") };
+
+        Technology[] technologyEntitySeeds = { new(Guid.NewGuid(), "WPF") { ProgrammingLanguageId = cSharpId }, new(Guid.NewGuid(), ".NET") { ProgrammingLanguageId = cSharpId }, new(Guid.NewGuid(), "Spring") { ProgrammingLanguageId = javaId } };
+
+        modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguageEntitySeeds);
+        modelBuilder.Entity<Technology>().HasData(technologyEntitySeeds);
     }
 }

@@ -13,6 +13,7 @@ public static class PersistenceServiceRegistration
     {
         services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
         services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
+        services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 
         return services;
     }

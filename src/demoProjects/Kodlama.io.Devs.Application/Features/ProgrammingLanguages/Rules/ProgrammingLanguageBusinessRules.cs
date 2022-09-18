@@ -14,6 +14,9 @@ public class ProgrammingLanguageBusinessRules
 
     public async Task BrandNameCanNotBeDuplicatedWhenInserted(string name)
     {
-        if ((await _programmingLanguageRepository.GetListAsync(x => x.Name == name)).Items.Any()) throw new BusinessException("Programming Language name exists.");
+        if ((await _programmingLanguageRepository.GetListAsync(x => x.Name == name)).Items.Any())
+        {
+            throw new BusinessException("Programming Language name exists.");
+        }
     }
 }
