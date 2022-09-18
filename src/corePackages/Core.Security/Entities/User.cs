@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Core.Persistence.Repositories;
+﻿using Core.Persistence.Repositories;
 using Core.Security.Enums;
 
 namespace Core.Security.Entities;
