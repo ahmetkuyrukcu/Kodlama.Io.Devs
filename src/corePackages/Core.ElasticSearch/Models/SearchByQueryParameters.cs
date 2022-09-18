@@ -6,5 +6,5 @@ public class SearchByQueryParameters : SearchParameters
 
     public string Query { get; set; }
 
-    public string[] Fields { get; set; }
+    public IEnumerable<string> Fields { get; set; }
 }

@@ -15,7 +15,7 @@ public class MailKitMailService : IMailService
 
     public void SendMail(Mail mail)
     {
-        MimeMessage email = new();
+        using MimeMessage email = new();
 
         email.From.Add(new MailboxAddress(_mailSettings.SenderFullName, _mailSettings.SenderEmail));
 

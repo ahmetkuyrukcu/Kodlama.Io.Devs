@@ -6,7 +6,7 @@ public class OtpAuthenticator : Entity
 {
     public Guid UserId { get; set; }
 
-    public byte[] SecretKey { get; set; }
+    public IEnumerable<byte> SecretKey { get; set; }
 
     public bool IsVerified { get; set; }
 
@@ -16,7 +16,7 @@ public class OtpAuthenticator : Entity
     {
     }
 
-    public OtpAuthenticator(Guid id, Guid userId, byte[] secretKey, bool isVerified) : this()
+    public OtpAuthenticator(Guid id, Guid userId, IEnumerable<byte> secretKey, bool isVerified) : this()
     {
         Id = id;
         UserId = userId;

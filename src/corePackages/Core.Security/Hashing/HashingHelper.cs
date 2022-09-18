@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Core.Security.Hashing;
 
-public class HashingHelper
+public static class HashingHelper
 {
     public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
     {

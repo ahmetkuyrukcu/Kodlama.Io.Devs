@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
 
 namespace Core.Security.EmailAuthenticator;
 
@@ -11,6 +12,6 @@ public class EmailAuthenticatorHelper : IEmailAuthenticatorHelper
 
     public Task<string> CreateEmailActivationCode()
     {
-        return Task.FromResult(RandomNumberGenerator.GetInt32(Convert.ToInt32(Math.Pow(10, 6))).ToString().PadLeft(6, '0'));
+        return Task.FromResult(RandomNumberGenerator.GetInt32(Convert.ToInt32(Math.Pow(10, 6), CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture).PadLeft(6, '0'));
     }
 }

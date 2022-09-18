@@ -60,7 +60,7 @@ public class Paginate<T> : IPaginate<T>
             Index = index;
             Size = size;
             From = from;
-            Count = enumerable.Count();
+            Count = enumerable.Length;
             Pages = (int)Math.Ceiling(Count / (double)Size);
             Items = enumerable.Skip((Index - From) * Size).Take(Size).ToList();
         }
@@ -120,7 +120,7 @@ public class Paginate<TSource, TResult> : IPaginate<TResult>
             Index = index;
             Size = size;
             From = from;
-            Count = enumerable.Count();
+            Count = enumerable.Length;
             Pages = (int)Math.Ceiling(Count / (double)Size);
             Items = new List<TResult>(converter(enumerable.Skip((Index - From) * Size).Take(Size).ToArray()));
         }

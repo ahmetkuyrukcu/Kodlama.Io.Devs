@@ -1,4 +1,5 @@
-﻿using Core.Persistence.Repositories;
+﻿using System.Collections;
+using Core.Persistence.Repositories;
 using Core.Security.Enums;
 
 namespace Core.Security.Entities;
@@ -11,9 +12,9 @@ public class User : Entity
 
     public string Email { get; set; }
 
-    public byte[] PasswordSalt { get; set; }
+    public IEnumerable<byte> PasswordSalt { get; set; }
 
-    public byte[] PasswordHash { get; set; }
+    public IEnumerable<byte> PasswordHash { get; set; }
 
     public bool Status { get; set; }
 
@@ -27,7 +28,7 @@ public class User : Entity
     {
     }
 
-    public User(Guid id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType) : this()
+    public User(Guid id, string firstName, string lastName, string email, IEnumerable<byte> passwordSalt, IEnumerable<byte> passwordHash, bool status, AuthenticatorType authenticatorType) : this()
     {
         Id = id;
         FirstName = firstName;

@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Globalization;
+using System.Security.Claims;
 
 namespace Core.Security.Extensions;
 
@@ -16,6 +17,6 @@ public static class ClaimsPrincipalExtensions
 
     public static int GetUserId(this ClaimsPrincipal claimsPrincipal)
     {
-        return Convert.ToInt32(claimsPrincipal?.Claims(ClaimTypes.NameIdentifier)?.FirstOrDefault());
+        return Convert.ToInt32(claimsPrincipal?.Claims(ClaimTypes.NameIdentifier)?.FirstOrDefault(), CultureInfo.InvariantCulture);
     }
 }

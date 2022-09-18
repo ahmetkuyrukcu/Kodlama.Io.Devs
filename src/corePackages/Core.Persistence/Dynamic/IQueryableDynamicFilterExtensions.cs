@@ -1,4 +1,5 @@
-﻿using System.Linq.Dynamic.Core;
+﻿using System.Globalization;
+using System.Linq.Dynamic.Core;
 using System.Text;
 
 namespace Core.Persistence.Dynamic;
@@ -54,23 +55,23 @@ public static class IQueryableDynamicFilterExtensions
         {
             if (filter.Operator == "doesnotcontain")
             {
-                where.Append($"(!np({filter.Field}).{comparison}(@{index}))");
+                where.Append(string.Format(CultureInfo.InvariantCulture, "(!np({0}).{1}(@{2}))", filter.Field, comparison, index));
             }
             else if (comparison is "StartsWith" or "EndsWith" or "Contains")
             {
-                where.Append($"(np({filter.Field}).{comparison}(@{index}))");
+                where.Append(string.Format(CultureInfo.InvariantCulture, "(np({0}).{1}(@{2}))", filter.Field, comparison, index));
             }
             else
             {
-                where.Append($"np({filter.Field}) {comparison} @{index}");
+                where.Append(string.Format(CultureInfo.InvariantCulture, "np({0}) {1} @{2}", filter.Field, comparison, index));
             }
         }
         else if (filter.Operator is "isnull" or "isnotnull")
         {
-            where.Append($"np({filter.Field}) {comparison}");
+            where.Append(string.Format(CultureInfo.InvariantCulture, "np({0}) {1}", filter.Field, comparison));
         }
 
-        if (filter.Logic is not null && filter.Filters is not null && filter.Filters.Any())
+        if (filter.Logic != null && filter.Filters != null && filter.Filters.Any())
         {
             return $"{where} {filter.Logic} ({string.Join($" {filter.Logic} ", filter.Filters.Select(f => Transform(f, filters)).ToArray())})";
         }

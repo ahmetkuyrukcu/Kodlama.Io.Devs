@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,7 +51,7 @@ public class ExceptionMiddleware
 
     private static Task CreateAuthorizationException(HttpContext context, Exception exception)
     {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized, CultureInfo.InvariantCulture);
 
         return context.Response.WriteAsync(new AuthorizationProblemDetails
         {
@@ -64,7 +65,7 @@ public class ExceptionMiddleware
 
     private static Task CreateBusinessException(HttpContext context, Exception exception)
     {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest, CultureInfo.InvariantCulture);
 
         return context.Response.WriteAsync(new BusinessProblemDetails
         {
@@ -78,7 +79,7 @@ public class ExceptionMiddleware
 
     private static Task CreateValidationException(HttpContext context, Exception exception)
     {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest, CultureInfo.InvariantCulture);
         object errors = ((ValidationException)exception).Errors;
 
         return context.Response.WriteAsync(new ValidationProblemDetails
@@ -94,7 +95,7 @@ public class ExceptionMiddleware
 
     private static Task CreateInternalException(HttpContext context, Exception exception)
     {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError, CultureInfo.InvariantCulture);
 
         return context.Response.WriteAsync(new ProblemDetails
         {

@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 
 namespace Core.ElasticSearch;
 
-public class ElasticSearchManager : IElasticSearch
+public class ElasticSearchManager : IElasticSearch, IDisposable
 {
     private readonly ConnectionSettings _connectionSettings;
 
     public ElasticSearchManager(IConfiguration configuration)
     {
         ElasticSearchConfig settings = configuration.GetSection("ElasticSearchConfig").Get<ElasticSearchConfig>();
-        SingleNodeConnectionPool pool = new(new Uri(settings.ConnectionString));
+        using SingleNodeConnectionPool pool = new(new Uri(settings.ConnectionString));
         _connectionSettings = new ConnectionSettings(pool, (builtInSerializer, connectionSettings) =>
                                                          new JsonNetSerializer(builtInSerializer, connectionSettings, () =>
                                                                  new JsonSerializerSettings
@@ -113,7 +113,7 @@ public class ElasticSearchManager : IElasticSearch
                                                  .Query(a => a.SimpleQueryString(c => c
                                                             .Name(queryParameters.QueryName)
                                                             .Boost(1.1)
-                                                            .Fields(queryParameters.Fields)
+                                                            .Fields(queryParameters.Fields.ToArray())
                                                             .Query(queryParameters.Query)
                                                             .Analyzer("standard")
                                                             .DefaultOperator(Operator.Or)
@@ -150,6 +150,20 @@ public class ElasticSearchManager : IElasticSearch
         UpdateResponse<object> response = await elasticClient.UpdateAsync<object>(model.ElasticId, u => u.Index(model.IndexName).Doc(model.Item));
 
         return new ElasticSearchResult(response.IsValid, response.IsValid ? "Success" : response.ServerError.Error.Reason);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            ((IDisposable)_connectionSettings)?.Dispose();
+        }
     }
 
     private ElasticClient GetElasticClient(string indexName)
