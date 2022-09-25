@@ -19,4 +19,12 @@ public class TechnologyBusinessRules
             throw new BusinessException("Technology name exists.");
         }
     }
+
+    public async Task TechnologyNameCanNotBeDuplicatedWhenUpdated(string name, Guid id)
+    {
+        if ((await _technologyRepository.GetListAsync(x => x.Name == name && x.Id != id)).Items.Any())
+        {
+            throw new BusinessException("Technology name exists.");
+        }
+    }
 }

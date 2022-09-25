@@ -2,6 +2,7 @@
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using Kodlama.Io.Devs.Application.Features.Technologies.Rules;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,7 @@ namespace Kodlama.Io.Devs.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ProgrammingLanguageBusinessRules>();
+            services.AddScoped<TechnologyBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

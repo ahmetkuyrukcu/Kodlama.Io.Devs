@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.Io.Devs.Application.Services.Repositories;
 using MediatR;
 
@@ -10,11 +11,13 @@ public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdatePro
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
     private readonly IMapper _mapper;
+    private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
-    public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
+    public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
     {
         _programmingLanguageRepository = programmingLanguageRepository;
         _mapper = mapper;
+        _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
     }
 
     public async Task<ProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
@@ -25,6 +28,8 @@ public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdatePro
         {
             throw new BusinessException("Programming Language not found!");
         }
+
+        await _programmingLanguageBusinessRules.BrandNameCanNotBeDuplicatedWhenUpdated(request.Name, request.Id);
 
         _mapper.Map(request, programmingLanguage);
 

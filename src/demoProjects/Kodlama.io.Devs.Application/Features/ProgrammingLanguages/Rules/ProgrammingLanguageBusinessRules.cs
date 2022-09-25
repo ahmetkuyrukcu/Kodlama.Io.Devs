@@ -19,4 +19,12 @@ public class ProgrammingLanguageBusinessRules
             throw new BusinessException("Programming Language name exists.");
         }
     }
+
+    public async Task BrandNameCanNotBeDuplicatedWhenUpdated(string name, Guid id)
+    {
+        if ((await _programmingLanguageRepository.GetListAsync(x => x.Name == name && x.Id != id)).Items.Any())
+        {
+            throw new BusinessException("Programming Language name exists.");
+        }
+    }
 }
