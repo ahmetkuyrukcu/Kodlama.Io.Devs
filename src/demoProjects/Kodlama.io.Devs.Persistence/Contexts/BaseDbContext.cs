@@ -1,4 +1,5 @@
-﻿using Kodlama.Io.Devs.Domain.Entities;
+﻿using Core.Security.Entities;
+using Kodlama.Io.Devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -9,6 +10,14 @@ public class BaseDbContext : DbContext
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
 
     public DbSet<Technology> Technologies { get; set; }
+
+    public DbSet<User> Users { get; set; }
+
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected IConfiguration Configuration { get; set; }
 
@@ -26,19 +35,9 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ProgrammingLanguage>(x =>
-        {
-            x.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
-            x.Property(p => p.Id).HasColumnName("Id");
-            x.Property(p => p.Name).HasColumnName("Name");
-        });
-
         modelBuilder.Entity<Technology>(x =>
         {
-            x.ToTable("Technologies").HasKey(k => k.Id);
-            x.Property(p => p.Id).HasColumnName("Id");
-            x.Property(p => p.Name).HasColumnName("Name");
-            x.HasOne(p => p.ProgrammingLanguage).WithMany(p => p.Technologies).HasForeignKey(p => p.ProgrammingLanguageId);
+            x.HasOne(p => p.ProgrammingLanguage).WithMany(p => p.Technologies).HasForeignKey(p => p.ProgrammingLanguageId).OnDelete(DeleteBehavior.Cascade);
         });
 
         var cSharpId = Guid.NewGuid();

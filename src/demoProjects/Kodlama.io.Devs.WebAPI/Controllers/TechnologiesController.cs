@@ -27,7 +27,7 @@ public class TechnologiesController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand technologyCommand)
     {
-        return Created(new Uri(string.Empty), await Mediator.Send(technologyCommand));
+        return Created(new Uri("about:blank"), await Mediator.Send(technologyCommand));
     }
 
     [HttpPut]

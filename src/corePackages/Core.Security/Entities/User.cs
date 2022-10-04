@@ -11,9 +11,11 @@ public class User : Entity
 
     public string Email { get; set; }
 
-    public IEnumerable<byte> PasswordSalt { get; set; }
+#pragma warning disable CA1819 // Properties should not return arrays
+    public byte[] PasswordSalt { get; set; }
 
-    public IEnumerable<byte> PasswordHash { get; set; }
+    public byte[] PasswordHash { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public bool Status { get; set; }
 
@@ -27,7 +29,7 @@ public class User : Entity
     {
     }
 
-    public User(Guid id, string firstName, string lastName, string email, IEnumerable<byte> passwordSalt, IEnumerable<byte> passwordHash, bool status, AuthenticatorType authenticatorType) : this()
+    public User(Guid id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType) : this()
     {
         Id = id;
         FirstName = firstName;

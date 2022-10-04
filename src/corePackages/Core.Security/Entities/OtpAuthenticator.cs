@@ -6,7 +6,9 @@ public class OtpAuthenticator : Entity
 {
     public Guid UserId { get; set; }
 
-    public IEnumerable<byte> SecretKey { get; set; }
+#pragma warning disable CA1819 // Properties should not return arrays
+    public byte[] SecretKey { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public bool IsVerified { get; set; }
 
@@ -16,7 +18,7 @@ public class OtpAuthenticator : Entity
     {
     }
 
-    public OtpAuthenticator(Guid id, Guid userId, IEnumerable<byte> secretKey, bool isVerified) : this()
+    public OtpAuthenticator(Guid id, Guid userId, byte[] secretKey, bool isVerified) : this()
     {
         Id = id;
         UserId = userId;

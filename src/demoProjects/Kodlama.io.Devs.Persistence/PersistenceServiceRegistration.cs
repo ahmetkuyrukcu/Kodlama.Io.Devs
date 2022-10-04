@@ -14,6 +14,10 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
         services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
         services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+        services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
         return services;
     }
